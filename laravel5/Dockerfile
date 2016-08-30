@@ -7,12 +7,17 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -y install nginx php7.0-mcrypt php7.0
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 RUN curl -sS https://getcomposer.org/installer | php
 RUN mv composer.phar /usr/local/bin/composer
-RUN service nginx start
 VOLUME /var/www
 
 ADD webapp/ /var/www/
 
 RUN chown -R www-data.www-data /var/www/*
 
+RUN chmod 755 -R /var/www/webapp/app/storage
+
 EXPOSE 80
 EXPOSE 443
+
+COPY run_install_laravel.sh /usr/local/bin/run_install_laravel
+
+CMD service php7.0-fpm start && nginx
