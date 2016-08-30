@@ -9,5 +9,9 @@ RUN curl -sS https://getcomposer.org/installer | php
 RUN mv composer.phar /usr/local/bin/composer
 VOLUME /var/www
 
+ADD webapp/ /var/www/
+
+RUN chown -R www-data.www-data /var/www/*
+
 EXPOSE 80
 EXPOSE 443
