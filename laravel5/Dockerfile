@@ -8,3 +8,6 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 RUN curl -sS https://getcomposer.org/installer | php
 RUN mv composer.phar /usr/local/bin/composer
 VOLUME /var/www
+
+EXPOSE 80
+EXPOSE 443
